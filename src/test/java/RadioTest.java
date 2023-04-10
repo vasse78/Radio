@@ -5,25 +5,45 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
+    Radio number = new Radio();
+    Radio number1 = new Radio(100);
+
+    @ParameterizedTest
+    @CsvSource({
+            "100,0",
+            "-1,0",
+            "88,88",
+            "0,0",
+            "99,99",
+            "1,1"
+    })
+
+    public void test1(int newNumberStation, int expected) {
+
+        number1.setNumberStation(newNumberStation);
+        int actual = number1.getNumberStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
     @ParameterizedTest
     @CsvSource({
             "10,0",
             "-1,0",
             "8,8",
-            "1,1",
-            "9,9",
             "0,0",
-            "5,5"
-
-
+            "9,9",
+            "1,1"
     })
-    public void shouldSetStation(int newNumberStation, int expected) {
-        Radio number = new Radio();
+
+    public void test(int newNumberStation, int expected) {
+
         number.setNumberStation(newNumberStation);
         int actual = number.getNumberStation();
 
         Assertions.assertEquals(expected, actual);
     }
+
 
     @ParameterizedTest
     @CsvSource({
@@ -37,7 +57,7 @@ public class RadioTest {
 
     })
     public void shouldNextStation(int newNumberStation, int expected) {
-        Radio number = new Radio();
+
         number.setNumberStation(newNumberStation);
         number.next();
         int actual = number.getNumberStation();
@@ -55,7 +75,7 @@ public class RadioTest {
             "5,4"
     })
     public void shouldPrevStation(int newNumberStation, int expected) {
-        Radio number = new Radio();
+
         number.setNumberStation(newNumberStation);
         number.prev();
         int actual = number.getNumberStation();
@@ -72,7 +92,7 @@ public class RadioTest {
             "1,1"
     })
     public void shouldVolume(int newVolume, int expected) {
-        Radio number = new Radio();
+
         number.setVolume(newVolume);
         int actual = number.getVolume();
         Assertions.assertEquals(expected, actual);
@@ -91,7 +111,7 @@ public class RadioTest {
 
     })
     public void shouldNextVolume(int newVolume, int expected) {
-        Radio number = new Radio();
+
         number.setVolume(newVolume);
         number.nextVolume();
         int actual = number.getVolume();
@@ -111,7 +131,7 @@ public class RadioTest {
 
     })
     public void shouldMinusVolume(int newVolume, int expected) {
-        Radio number = new Radio();
+
         number.setVolume(newVolume);
         number.minusVolume();
         int actual = number.getVolume();
